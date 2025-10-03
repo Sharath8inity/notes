@@ -1,0 +1,11 @@
+bugs
+- camera focus mode should be set for clear images
+- image mismatch
+- data shuffling
+- if a mobile device or laptop part is seen then it doesn't return any ingredients
+- create slugs for sections, page nos
+
+
+prompt modifications
+- return ingredients for only food items
+- return ingredients in brackets

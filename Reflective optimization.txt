@@ -1,0 +1,33 @@
+reflective optimization in prompt space:
+- the idea is, instead of updating weights, we can update the prompt. in case of a mistake, a single prompt can give a large behaviour change which is not possible with the updation of weights.
+- GEPA (generic pareto): an algo which combines the above idea
+- multi hop search: AI hops across different data sources to find an answer. in the first hop a query is run and generates a new query and in the subsequent hops, another search is conducted with the sub query. the information gathered from each hop is combined to form a comprehensive and accurate answer to the original query
+
+how GEPA works:
+- the original query generates a summary (summary 1)
+- read the sum
+
+
+BetterTogether: Experimental
+BootstrapFewShot: Done
+BootstrapFewShotWithRandomSearch: Done
+BootstrapFinetune
+BootstrapRS
+COPRO
+Ensemble: Uniterable
+GEPA
+InferRules: Done
+KNN
+KNNFewShot
+LabeledFewShot: Done
+MIPROv2: Done
+SIMBA: Trainset too small (8 < 32)
+Vanilla: it used labeledfewshot template
+
+After experiments on dspy optimizers:
+- gemma cannot be run via gemini api. only can be run by bytez api or ollama
+- gemini 2.5 flash lite has a high token limit. rest models face rate limits for the bigger program
+- rate limit issue for groq, bytz, hf apis
+- gemma is gibberish. cant perform well
+- solution: using gemini 2.5 flash lite model with any optimizer. or using ollama via a gpu. or by purchasing any api
+- dspy lacks in model integrations

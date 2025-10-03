@@ -1,0 +1,782 @@
+BestOfN
+
+[2025-09-17T07:36:24.141939]
+
+System message:
+
+Your input fields are:
+1. `dietary_preferences` (list[str]): List of user's dietary preferences, restrictions, and ingredients to avoid
+2. `product_info` (ProductInfo): Product information object with name, brand, and ingredients
+Your output fields are:
+1. `reasoning` (str): 
+2. `flagged_ingredients` (list[FlaggedIngredient]): List of problematic ingredients with safety levels, matched preferences
+All interactions will be structured in the following way, with the appropriate values filled in.
+
+[[ ## dietary_preferences ## ]]
+{dietary_preferences}
+
+[[ ## product_info ## ]]
+{product_info}
+
+[[ ## reasoning ## ]]
+{reasoning}
+
+[[ ## flagged_ingredients ## ]]
+{flagged_ingredients}        # note: the value you produce must adhere to the JSON schema: {"type": "array", "$defs": {"FlaggedIngredient": {"type": "object", "properties": {"name": {"type": "string", "title": "Name"}, "preference": {"type": "string", "title": "Preference"}, "safety": {"$ref": "#/$defs/SafetyLevel"}}, "required": ["name", "safety", "preference"], "title": "FlaggedIngredient"}, "SafetyLevel": {"type": "string", "enum": ["DefinitelyUnsafe", "MaybeUnsafe"], "title": "SafetyLevel"}}, "items": {"$ref": "#/$defs/FlaggedIngredient"}}
+
+[[ ## completed ## ]]
+In adhering to this structure, your objective is: 
+        Analyze food products for dietary preference violations and safety concerns.
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Low FODMAP"]
+
+[[ ## product_info ## ]]
+{"name": "avena", "brand": null, "ingredients": "fiocchi d'avena, zucchero, farina di avena, olio di palma, sciroppo di zucchero invertito, agente lievitante (carbonati di sodio), sale"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "zucchero", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Zucchero is a type of sugar, and many sugars can be high in FODMAPs."}, {"name": "sciroppo di zucchero invertito", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Invert sugar syrup can be high in fructose, which is a FODMAP."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid centeno", "Avoid oat", "Avoid corn", "Avoid egg", "Avoid lactose", "Avoid gluten"]
+
+[[ ## product_info ## ]]
+{"name": "Soy sauce", "brand": "Kikkoman Sales USA, Inc.", "ingredients": "water, soybeans, wheat, salt"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "wheat", "safety": "DefinitelyUnsafe", "preference": "Avoid gluten", "reasoning": "Wheat contains gluten."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Halal"]
+
+[[ ## product_info ## ]]
+{"name": "Beurre d'arachide crémeux grillé foncé", "brand": null, "ingredients": "roasted peanuts, sugar, peanut oil, hydrogenated vegetable oil, salt, mono- and diglycerides, cooking molasses, vegetable oil, pe, aily value motidienne ingrédients (arachides grillées), sucre, huile d'arachide, huile végétale hydrogénée, sel, mono- et 13% 7 % diglycérides, mélasse de cuisine, huile végétale, ng 3 % imported by, importé par ©, ® smucker foods of canada corp, and its affiliates, ou ses sociétés affiliées markham, on l3r op3 product of usa, produit des e.-u.a 1% 5 % me 0% o questions? 1-800-567-1897 0% 0160 0 % if seal is already open, do not use, ne pas utiliser si le sceau est brisé, 45168001 61500z5736"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "hydrogenated vegetable oil", "safety": "MaybeUnsafe", "preference": "Halal", "reasoning": "Some hydrogenated vegetable oils may be derived from non-Halal sources."}, {"name": "mono- and diglycerides", "safety": "MaybeUnsafe", "preference": "Halal", "reasoning": "Mono- and diglycerides can be derived from animal fats, which may not be Halal."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Low FODMAP"]
+
+[[ ## product_info ## ]]
+{"name": "Vanilla Gut-Loving Prebiotic* Yoghurt", "brand": null, "ingredients": "yoghurt, live cultures, chicory root fibre, natural flavouring, madagascan vanilla bean extract"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "chicory root fibre", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Chicory root is high in FODMAPs."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["No gluten", "no dairy", "no eggs", "no crab", "no oats", "no chocolate", "no peanuts", "no hazelnuts", "low histamine diet"]
+
+[[ ## product_info ## ]]
+{"name": "Gluten Free Original with Flax Crackers", "brand": "Dare Foods Limited", "ingredients": "Corn starch, arrowroot flour, canola, coconut oil, green lentil, rice bran, flax seeds sugar, salt, sesame seeds, natural flavor, leavening (ammonium bicarbonate, baking soda), xanthan gum, whey (a milk ingredients), soy lecithin"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "whey", "safety": "DefinitelyUnsafe", "preference": "no dairy", "reasoning": "Whey is a dairy ingredient."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Candida Diet"]
+
+[[ ## product_info ## ]]
+{"name": "Organic Cacao Powder", "brand": "BETTERBODYFOODS", "ingredients": "cacao powder"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "cacao powder", "safety": "DefinitelyUnsafe", "preference": "Candida Diet", "reasoning": "Cacao can be high in sugar and may not be suitable for a Candida Diet."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["no soy", "no high fructose corn syrup", "no artificial sweeteners", "no gluten or wheat"]
+
+[[ ## product_info ## ]]
+{"name": "Gluten Free Penne", "brand": "Barilla G & R F.Lli S.P.A.", "ingredients": "corn flour, rice flour, mono- and diglycerides"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "mono- and diglycerides", "safety": "MaybeUnsafe", "preference": "no soy", "reasoning": "Mono- and diglycerides can be derived from soy."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Low FODMAP"]
+
+[[ ## product_info ## ]]
+{"name": "Lunch Bowl", "brand": null, "ingredients": "parboiled long grain rice, jasmine rice, steamed wheat berries, bulgur wheat, edamame beans, red pepper, coconut milk, carrot, wild rice, salt, lemongrass, chilli, kaffir lime leaf, chilli, ginger, soya sauce"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "steamed wheat berries", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Wheat is high in FODMAPs."}, {"name": "bulgur wheat", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Bulgur wheat is high in FODMAPs."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Low FODMAP"]
+
+[[ ## product_info ## ]]
+{"name": "Kekir Blueberry", "brand": null, "ingredients": "MILK fermented with live kefir cultures, blueberry, concentrated grape juice, blackcurrant, maize starch, natural flavourings, concentrated lemon juice, ICIUM to the see ingredients in BOLD, NUTRITION TYPICAL VALUES Energy Fat"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "concentrated grape juice", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Grapes are high in fructose, and concentrated grape juice is a concentrated source of fructose."}, {"name": "blackcurrant", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Blackcurrants are high in fructose."}, {"name": "natural flavourings", "safety": "MaybeUnsafe", "preference": "Low FODMAP", "reasoning": "Natural flavourings could potentially contain high FODMAP ingredients."}, {"name": "concentrated lemon juice", "safety": "MaybeUnsafe", "preference": "Low FODMAP", "reasoning": "Concentrated lemon juice could potentially be high in FODMAPs."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid gluten"]
+
+[[ ## product_info ## ]]
+{"name": "Chicken Breakfast Links", "brand": null, "ingredients": "Contains 2% and less of (Spices), Sea Salt, Water, Parsley, Extract of, Rosemary, Vinegar"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Extract of", "safety": "MaybeUnsafe", "preference": "Avoid gluten", "reasoning": "Extract of could refer to a gluten-containing extract."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid gluten"]
+
+[[ ## product_info ## ]]
+{"name": "Southwest Chipotle Ranch", "brand": "Hidden Valley", "ingredients": "Ranch Dressing Base, Sodium Benzoate, Potassium Sorbate, Natural Flavors, Dried Chipotle Pepper"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Ranch Dressing Base", "safety": "MaybeUnsafe", "preference": "Avoid gluten", "reasoning": "Ranch Dressing Base may contain gluten."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid GMO", "Avoid canola oil", "Avoid omega 6"]
+
+[[ ## product_info ## ]]
+{"name": "Fruit & Vegetable Wash", "brand": null, "ingredients": "Purified Water, Alcohol Denatured Lemon Oil, Sunflower Oil, Glycerin, Natural Mineral (Potassium Hydroxide), Grapefruit Oil"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Sunflower Oil", "safety": "DefinitelyUnsafe", "preference": "Avoid omega 6", "reasoning": "Sunflower Oil is high in Omega-6 fatty acids."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Low FODMAP"]
+
+[[ ## product_info ## ]]
+{"name": "Maestro Cereale avec du Levain, Millet et Quinoa", "brand": null, "ingredients": "Amidon de maïs, eau, levain (farine de riz, eau), amidon de riz, fibre végétale (psyllium), sirop de riz, huile de tournesol, soja, graines de tournesol, farine de millet, graines de lin, épaississant (hydroxypropylméthyle cellulose), farine de quinoa, levure, farine de riz, protéines de soja, son de soja, sel iodé (sel, iodure de potassium), graines de pavot, graines de chia (Salvia hispanica), miel"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "sirop de riz", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Rice Syrup is high in FODMAPs."}, {"name": "soja", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Soy is high in FODMAPs."}, {"name": "protéines de soja", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Soy Protein is high in FODMAPs."}, {"name": "son de soja", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Soy Bran is high in FODMAPs."}, {"name": "miel", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Honey is high in FODMAPs."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Low sugar", "vegan"]
+
+[[ ## product_info ## ]]
+{"name": "Cinnamon Crisps", "brand": null, "ingredients": "Gluten-free oat protein, Gluten-free oat fibre, Prebiotic fibre, Faba protein, Potato protein, Tapioca starch, Cinnamon powder, Natural flavour, Isomaltulose, Monk fruit juice extract, Virgin Avocado oil, Sea salt"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Isomaltulose", "safety": "DefinitelyUnsafe", "preference": "Low sugar", "reasoning": "Isomaltulose is a sugar."}, {"name": "Monk fruit juice extract", "safety": "DefinitelyUnsafe", "preference": "Low sugar", "reasoning": "Monk fruit juice extract is a form of sugar."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["No preservative", "No alcohol", "No palm oil", "No meat"]
+
+[[ ## product_info ## ]]
+{"name": "Ezekiel 4:9 Sesame Sprouted Whole Grain Bread", "brand": "Food For Life Baking Co Inc", "ingredients": "Sprouted Wheat, Filtered Water, Sprouted Barley, Sprouted Millet, Malted Barley, Sprouted Lentils, Sprouted Soybeans, Sprouted Spelt, Yeast, Wheat Gluten, Sea Salt, Sesame Seeds"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Malted Barley", "safety": "DefinitelyUnsafe", "preference": "No preservative", "reasoning": "Malted Barley can be considered a form of preservative."}, {"name": "Malted Barley", "safety": "DefinitelyUnsafe", "preference": "No alcohol", "reasoning": "Malted Barley can be used in the production of alcohol."}, {"name": "Malted Barley", "safety": "DefinitelyUnsafe", "preference": "No meat", "reasoning": "Malted Barley can be used in the production of meat products."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid all dairy"]
+
+[[ ## product_info ## ]]
+{"name": "Organic Plain Awesome Bagel", "brand": "Avb Corp.", "ingredients": "wheat flour, water, ancient grains blend (barley meal, dark rye flour, spelt flour, whole millet flour, quinoa flour), wheat gluten, cane sugar, thick rolled oats, canola oil, yeast, cultured wheat, vinegar, salt, rye flour, yellow cornmeal, wheat enzymes"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "cultured wheat", "safety": "DefinitelyUnsafe", "preference": "Avoid all dairy", "reasoning": "Cultured Wheat can sometimes refer to a product that has been cultured with dairy."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Candida Diet"]
+
+[[ ## product_info ## ]]
+{"name": "Non-Dairy Protein Shake - Dark Chocolate", "brand": "OWYN", "ingredients": "Water, owyn protein blend, pea protein, pumpkin seed protein, flax oil, vegetable fiber, cane sugar, sunflower oil, cocoa powder, sunflower lecithin, natural flavors, himalayan pink salt, guar gum, greens blend, broccoli, spinach, kale, monk fruit extract"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "cane sugar", "safety": "DefinitelyUnsafe", "preference": "Candida Diet", "reasoning": "Cane sugar can feed Candida."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Dairy free", "Gluten free", "Low fodmap"]
+
+[[ ## product_info ## ]]
+{"name": "Gluten Free Oat Bran", "brand": "Bob's Red Mill Natural Foods, Inc.", "ingredients": "Whole Grain Oats, Raisins (Raisins, Sunflower Oil), Almonds, Sunflower Seeds, Cranberries (Cranberries, Cane Sugar, Sunflower Oil), Brown Rice Crisps (Rice Flour, Rice Bran, Honey), Dried Apples, Coconut, Pumpkin Seeds"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Whole Grain Oats", "safety": "DefinitelyUnsafe", "preference": "Gluten free", "reasoning": "Oats can be contaminated with gluten during processing."}, {"name": "Raisins", "safety": "DefinitelyUnsafe", "preference": "Low fodmap", "reasoning": "Raisins are high in FODMAPs."}, {"name": "Dried Apples", "safety": "DefinitelyUnsafe", "preference": "Low fodmap", "reasoning": "Dried Apples are high in FODMAPs."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["No gluten"]
+
+[[ ## product_info ## ]]
+{"name": "100% Juice", "brand": "Naked Juice Co.", "ingredients": "Pineapple Juice, Apple Juice from Concentrate (Water Added), Apple Juice Concentrate, Banana Puree, Coconut Milk (Filtered Water, Coconut Extract), Orange Juice, Chicory Root Fiber, Lemon Juice, Natural Flavor"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Chicory Root Fiber", "safety": "DefinitelyUnsafe", "preference": "No gluten", "reasoning": "Chicory Root Fiber can sometimes be processed in facilities that also process gluten."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid refined carbohydrates and sugars", "Avoid high fructose corn syrup", "No gums & emulsifiers", "Absolutely no seed oils", "Avoid seed oils", "Avoid added sugars"]
+
+[[ ## product_info ## ]]
+{"name": "100% Pure Raw & Unfiltered Honey", "brand": null, "ingredients": "Honey"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Honey", "safety": "DefinitelyUnsafe", "preference": "Avoid added sugars", "reasoning": "Honey is a form of added sugar."}, {"name": "Honey", "safety": "DefinitelyUnsafe", "preference": "Avoid refined carbohydrates and sugars", "reasoning": "Honey is a form of refined sugar."}, {"name": "Honey", "safety": "DefinitelyUnsafe", "preference": "Avoid added sugars", "reasoning": "Honey is a form of added sugar."}, {"name": "Honey", "safety": "DefinitelyUnsafe", "preference": "Avoid refined carbohydrates and sugars", "reasoning": "Honey is a form of refined sugar."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid processed foods", "Avoid refined sugars", "Avoid phosphorus", "Avoid red meats", "Avoid high sodium"]
+
+[[ ## product_info ## ]]
+{"name": "Organic Light In Sodium Creamy Butternut Squash Soup", "brand": "The Hain Celestial Group, Inc.", "ingredients": "Filtered water, butternut squash, potatoes, onions, carrots, evaporated cane syrup, honey, tapioca starch, garlic, sea salt, spices, canola oil, safflower oil, sunflower oil"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "evaporated cane syrup", "safety": "DefinitelyUnsafe", "preference": "Avoid refined sugars", "reasoning": "Evaporated Cane Syrup is a form of refined sugar."}, {"name": "honey", "safety": "DefinitelyUnsafe", "preference": "Avoid refined sugars", "reasoning": "Honey is a form of refined sugar."}, {"name": "sea salt", "safety": "DefinitelyUnsafe", "preference": "Avoid high sodium", "reasoning": "Sea Salt is a source of sodium."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Low FODMAP"]
+
+[[ ## product_info ## ]]
+{"name": "Original Oatcakes", "brand": null, "ingredients": "wholegrain oats, sustainable palm fruit oil, sea salt, raising agents (sodium bicarbonate, ammonium bicarbonate)"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "wholegrain oats", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Oats are high in FODMAPs."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["no wheat", "no dairy", "no garlic", "no onion", "No Fodmaps for me"]
+
+[[ ## product_info ## ]]
+{"name": "Oaties", "brand": null, "ingredients": "Wholegrain Oats"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Wholegrain Oats", "safety": "DefinitelyUnsafe", "preference": "no wheat", "reasoning": "Oats can be contaminated with wheat."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Low fodmap", "Low gluten", "Low sucrose", "Avoid maltose", "Avoid lactose", "Lactose"]
+
+[[ ## product_info ## ]]
+{"name": "Butter flavour popcorn", "brand": null, "ingredients": "popping corn, vegetable oil, vegetable oil, antioxidant (307), salt, natural butter flavour, natural colour (carotene), one 25 g serve of woolworths microwave butter flavoured popcorn contributes 39% of the 48g whole grain daily target intake"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "natural butter flavour", "safety": "DefinitelyUnsafe", "preference": "Lactose", "reasoning": "Natural butter flavour may contain lactose."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Dairy free", "Gluten free", "Low fodmap"]
+
+[[ ## product_info ## ]]
+{"name": "Gluten Free Vegan Egg Replacer", "brand": "Bob's Red Mill Natural Foods, Inc.", "ingredients": "Potato Starch, Tapioca Flour, Baking Soda, Psyllium Husk"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Potato Starch", "safety": "DefinitelyUnsafe", "preference": "Low fodmap", "reasoning": "Potato Starch is high in FODMAPs."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Candida Diet"]
+
+[[ ## product_info ## ]]
+{"name": "Chocolate banana", "brand": null, "ingredients": "Blend of Almond Milk, Coconut Milk (Filtered Water, Almonds, Coconut Cream), Koia Proprietary Protein Blend (Brown Rice Protein, Pea Protein, Chickpea Protein), Banana, Koia Prebiotic Fiber Blend (Agave Fiber, Chicory Root Fiber), Cane Sugar, Cocoa Powder, Natural Flavors, Sunflower Lecithin, Sea Salt, Monk Fruit Extract, Locust Bean Gum, Gellan Gum (Almonds, Coconuts)"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Cane Sugar", "safety": "DefinitelyUnsafe", "preference": "Candida Diet", "reasoning": "Cane Sugar can feed Candida."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Alpha gal"]
+
+[[ ## product_info ## ]]
+{"name": "Gluten Free Oatmeal With Flax & Chia", "brand": "Bob's Red Mill Natural Foods, Inc.", "ingredients": "WHOLE GRAIN OATS, BROWN SUGAR, CANE SUGAR, CHIA SEED, FLAXSEED, SEA SALT, NATURAL MAPLE FLAVOR (MALTODEXTRIN, MODIFIED FOOD STARCH, CARAMEL COLOR, NATURAL FLAVORS)"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "NATURAL MAPLE FLAVOR", "safety": "DefinitelyUnsafe", "preference": "Alpha gal", "reasoning": "Natural Maple Flavor may contain animal-derived ingredients."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid carbohydrates"]
+
+[[ ## product_info ## ]]
+{"name": "All Day Odor + Wetness Protection Deodorant", "brand": "D Teals", "ingredients": "Bacalyptu"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Bacalyptu", "safety": "DefinitelyUnsafe", "preference": "Avoid carbohydrates", "reasoning": "Bacalyptu is a carbohydrate."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid gluten"]
+
+[[ ## product_info ## ]]
+{"name": "Advanced Maximum Strength Antacid & Antigas", "brand": "Maalox", "ingredients": "Aluminum hydroxide, Magnesium hydroxide, Simethicone, Inactive ingredients (Benzyl alcohol, Butylparaben, Carboxymethylcellulose sodium, Flavor, Hypromellose, Microcrystalline cellulose, Propylparaben, Purified water, Saccharin sodium, Sorbitol solution)"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Carboxymethylcellulose sodium", "safety": "DefinitelyUnsafe", "preference": "Avoid gluten", "reasoning": "Carboxymethylcellulose sodium can be derived from gluten-containing sources."}, {"name": "Microcrystalline cellulose", "safety": "DefinitelyUnsafe", "preference": "Avoid gluten", "reasoning": "Microcrystalline cellulose can be derived from gluten-containing sources."}, {"name": "Sorbitol solution", "safety": "DefinitelyUnsafe", "preference": "Avoid gluten", "reasoning": "Sorbitol solution can be derived from gluten-containing sources."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Anti inflammatory diet"]
+
+[[ ## product_info ## ]]
+{"name": "Creamy Peanut Butter", "brand": "Wegmans Food Markets, Inc.", "ingredients": "Roasted peanuts, sugar, contains less than 2% of fully hydrogenated vegetable oils (rapeseed vegetable oils, cottonseed vegetable oils), soybean, salt, molasses"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "sugar", "safety": "DefinitelyUnsafe", "preference": "Anti inflammatory diet", "reasoning": "Sugar can promote inflammation."}, {"name": "fully hydrogenated vegetable oils", "safety": "DefinitelyUnsafe", "preference": "Anti inflammatory diet", "reasoning": "Fully hydrogenated oils can contribute to inflammation."}, {"name": "rapeseed vegetable oils", "safety": "DefinitelyUnsafe", "preference": "Anti inflammatory diet", "reasoning": "Rapeseed Oil (Canola Oil) can promote inflammation."}, {"name": "cottonseed vegetable oils", "safety": "DefinitelyUnsafe", "preference": "Anti inflammatory diet", "reasoning": "Cottonseed Oil can promote inflammation."}, {"name": "soybean", "safety": "DefinitelyUnsafe", "preference": "Anti inflammatory diet", "reasoning": "Soybean Oil can promote inflammation."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Corn allergy"]
+
+[[ ## product_info ## ]]
+{"name": "Kansas City Style Barbecue Sauce", "brand": "Heinz", "ingredients": "Distilled Vinegar, Sugar, Cane Sugar, Tomato Paste, Water, Salt, Modified Food Starch, Mustard Seed, Onion Powder, Garlic Powder, Natural Smoke Flavor"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Modified Food Starch", "safety": "MaybeUnsafe", "preference": "Corn allergy", "reasoning": "Modified Food Starch can be derived from Corn."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Any items in chocolate", "Butter should be unsalted", "Avoid hydrogenated oils. They can raise cholesterol", "No preservatives", "Dr David Perlmutter said: “Beware of agave.", "It contains as much as 70% fructose which is highly glycating — a process that produces harmful molecules in the body called advanced glycation end products (also known as AGEs) associated with aging, neurodegenerative disorders, and #diabetes.”", "Eggs should not be cage-free or free-range. They should be organic and pasture raised", "Avoid maltodextrin, according to Dr Berg", "Avoid high fructose corn syrup which is a leading cause of obesity in America", "Avoid enriched flour and enriched rice. They get rid of natural nutrients and then add back synthetic nutrients.", "Don’t buy anything from lunchables brand", "Don’t put too much sugar", "Sucralose can affect gut health and metabolism", "Erythritol is linked to increased risk of heart attack and stroke", "Aspartame is a carcinogen. It is also linked to heart attack and stroke.", "Avoid natural flavors as well as artificial flavors", "No seed oils", "No animal products. Milk and eggs are ok though", "Avoid carrageenan", "Rice is high in arsenic, so always go for organic rice"]
+
+[[ ## product_info ## ]]
+{"name": "Swiss cheese fondue original", "brand": "Mifroma", "ingredients": "Swiss emmental, gruyere cheese (cow's milk, cheese cultures, salt, enzyme), white wine, water, corn starch, kirsch brandy, salt, melting salts (sodium phosphate, sodium polyphosphate), spices"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Swiss emmental", "safety": "DefinitelyUnsafe", "preference": "No animal products. Milk and eggs are ok though", "reasoning": "Swiss emmental is a type of cheese, and cheese is an animal product."}, {"name": "gruyere cheese", "safety": "DefinitelyUnsafe", "preference": "No animal products. Milk and eggs are ok though", "reasoning": "gruyere cheese is a type of cheese, and cheese is an animal product."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+[[ ## dietary_preferences ## ]]
+["Low FODMAP"]
+
+[[ ## product_info ## ]]
+{"name": "Fermented Milk with Strawberry and Raspberry", "brand": "Danone", "ingredients": "Skimmed Milk, Cream (Milk), Sugar, Strawberry, Concentrated Raspberry Purée (0.6%), Modified Starch, Stabiliser (Pectin), Natural Flavourings, Vegetable and Fruit Concentrates (Carrot, Blueberry), Concentrated Lemon Juice, Milk Minerals Concentrate, Live Yogurt and Kefir Cultures, Yeasts"}
+
+Respond with the corresponding output fields, starting with the field `[[ ## reasoning ## ]]`, then `[[ ## flagged_ingredients ## ]]` (must be formatted as a valid Python list[FlaggedIngredient]), and then ending with the marker for `[[ ## completed ## ]]`.
+
+
+Response:
+
+[[ ## reasoning ## ]]
+The user is asking to identify ingredients that are not suitable for a Low FODMAP diet.
+
+- "Skimmed Milk" and "Cream (Milk)" contain lactose, which is a FODMAP.
+- "Sugar" is generally considered safe in small quantities, but large amounts can be a FODMAP. However, it's not flagged as "DefinitelyUnsafe" here as it's a common ingredient and amount isn't specified.
+- "Concentrated Raspberry Purée" is mentioned as 0.6%, and while raspberries are low FODMAP in certain serving sizes, concentrated purées can sometimes be higher in FODMAPs. However, it's not flagged as "DefinitelyUnsafe" without more specific information.
+- "Modified Starch" can sometimes be derived from high FODMAP ingredients, but without further information, it's not flagged as "DefinitelyUnsafe".
+- "Natural Flavourings" can sometimes contain high FODMAP ingredients, so it's flagged as "MaybeUnsafe".
+- "Concentrated Lemon Juice" is generally low FODMAP in typical serving sizes, but concentrated forms can sometimes be higher. It's not flagged as "DefinitelyUnsafe".
+- "Milk Minerals Concentrate" is likely to contain lactose, making it "DefinitelyUnsafe".
+- "Live Yogurt and Kefir Cultures" are generally low FODMAP.
+- "Yeasts" are generally low FODMAP.
+
+Therefore, "Skimmed Milk", "Cream (Milk)", and "Milk Minerals Concentrate" are flagged as "DefinitelyUnsafe" due to lactose content. "Natural Flavourings" is flagged as "MaybeUnsafe" due to potential high FODMAP ingredients.
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Skimmed Milk", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Milk contains lactose, which is a FODMAP."}, {"name": "Cream (Milk)", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Cream contains lactose, which is a FODMAP."}, {"name": "Natural Flavourings", "safety": "MaybeUnsafe", "preference": "Low FODMAP", "reasoning": "Natural flavourings can potentially contain high FODMAP ingredients."}, {"name": "Milk Minerals Concentrate", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP", "reasoning": "Milk minerals concentrate likely contains lactose, which is a FODMAP."}]
+
+[[ ## completed ## ]]
+
+
+
+
+
+History:  None
+Dietary Preferences: ['Low FODMAP'] ...
+Product Info: ProductInfo(name='Fermented Milk with Strawberry and Raspberry', brand='Danone', ...
+Pred: [FlaggedIngredient(name='Skimmed Milk', safety=<SafetyLevel.DEFINITELY_UNSAFE: 'DefinitelyUnsafe'>, preference='Low FODMAP'), FlaggedIngredient(name='Cream (Milk)', safety=<SafetyLevel.DEFINITELY_UNSAFE: 'DefinitelyUnsafe'>, preference='Low FODMAP'), FlaggedIngredient(name='Natural Flavourings', safety=<SafetyLevel.MAYBE_UNSAFE: 'MaybeUnsafe'>, preference='Low FODMAP'), FlaggedIngredient(name='Milk Minerals Concentrate', safety=<SafetyLevel.DEFINITELY_UNSAFE: 'DefinitelyUnsafe'>, preference='Low FODMAP')]
+Gold: [FlaggedIngredient(name='Sugar', safety=<SafetyLevel.DEFINITELY_UNSAFE: 'DefinitelyUnsafe'>, preference='Low FODMAP')]
+Latency: 2.2476553916931152
+Cost: 65.5
+Saving evaluation results to Google Sheet...
+Saving optimized program to programs/gemini-2.5-flash-lite/ingredientanalyzer_332_BootstrapFewShot_BestOfN_program.json...
+Program saved.

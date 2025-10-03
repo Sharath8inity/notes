@@ -1,0 +1,400 @@
+[2025-09-19T12:59:34.595850]
+
+System message:
+
+Your input fields are:
+1. `dietary_preferences` (list[str]): List of user's dietary preferences, restrictions, and ingredients to avoid
+2. `product_info` (ProductInfo): Product information object with name, brand, and ingredients
+Your output fields are:
+1. `reasoning` (str): 
+2. `flagged_ingredients` (list[FlaggedIngredient]): List of problematic ingredients with safety levels, matched preferences
+All interactions will be structured in the following way, with the appropriate values filled in.
+
+[[ ## dietary_preferences ## ]]
+{dietary_preferences}
+
+[[ ## product_info ## ]]
+{product_info}
+
+[[ ## reasoning ## ]]
+{reasoning}
+
+[[ ## flagged_ingredients ## ]]
+{flagged_ingredients}        # note: the value you produce must adhere to the JSON schema: {"type": "array", "$defs": {"FlaggedIngredient": {"type": "object", "properties": {"name": {"type": "string", "title": "Name"}, "preference": {"type": "string", "title": "Preference"}, "safety": {"$ref": "#/$defs/SafetyLevel"}}, "required": ["name", "safety", "preference"], "title": "FlaggedIngredient"}, "SafetyLevel": {"type": "string", "enum": ["DefinitelyUnsafe", "MaybeUnsafe"], "title": "SafetyLevel"}}, "items": {"$ref": "#/$defs/FlaggedIngredient"}}
+
+[[ ## completed ## ]]
+In adhering to this structure, your objective is: 
+        Analyze food products for dietary preference violations and safety concerns.
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid sodium citrate"]
+
+[[ ## product_info ## ]]
+{"name": "Example 092", "brand": null, "ingredients": "sodium citrate, milk"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "sodium citrate", "safety": "MaybeUnsafe", "preference": "Avoid sodium citrate", "reasoning": "Processed salt."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid msg"]
+
+[[ ## product_info ## ]]
+{"name": "Tomato Soup", "brand": "CAMPBELL SOUP COMPANY", "ingredients": "tomato puree (water, tomato paste), high fructose corn syrup, wheat flour, water, contains less than 2% of (salt), potassium chloride, citric acid, natural flavoring, ascorbic acid (vitamin c), monopotassium phosphate, celery, garlic oil"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "high fructose corn syrup", "safety": "DefinitelyUnsafe", "preference": "Avoid msg", "reasoning": "High Fructose Corn Syrup can be a source of MSG."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid cardamom"]
+
+[[ ## product_info ## ]]
+{"name": "Example 076", "brand": null, "ingredients": "cardamom, tea"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "cardamom", "safety": "DefinitelyUnsafe", "preference": "Avoid cardamom", "reasoning": "Contains cardamom."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid processed foods", "Avoid refined sugars", "Avoid phosphorus", "Avoid red meats", "Avoid high sodium"]
+
+[[ ## product_info ## ]]
+{"name": "Organic Light In Sodium Creamy Butternut Squash Soup", "brand": "The Hain Celestial Group, Inc.", "ingredients": "Filtered water, butternut squash, potatoes, onions, carrots, evaporated cane syrup, honey, tapioca starch, garlic, sea salt, spices, canola oil, safflower oil, sunflower oil"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "evaporated cane syrup", "safety": "DefinitelyUnsafe", "preference": "Avoid refined sugars", "reasoning": "Evaporated Cane Syrup is a form of refined sugar."}, {"name": "honey", "safety": "DefinitelyUnsafe", "preference": "Avoid refined sugars", "reasoning": "Honey is a form of refined sugar."}, {"name": "sea salt", "safety": "DefinitelyUnsafe", "preference": "Avoid high sodium", "reasoning": "Sea Salt is a source of sodium."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Gluten free"]
+
+[[ ## product_info ## ]]
+{"name": "Whole Wheat Bread", "brand": "Bakery Co", "ingredients": "Whole wheat flour, water, yeast, salt"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Whole wheat flour", "safety": "DefinitelyUnsafe", "preference": "Gluten free", "reasoning": "Wheat contains gluten."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid lactose"]
+
+[[ ## product_info ## ]]
+{"name": "Ice Cream Sandwich", "brand": "Yum", "ingredients": "Milk, cream, sugar, wheat flour"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Milk", "safety": "DefinitelyUnsafe", "preference": "Avoid lactose", "reasoning": "Contains lactose."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid artificial colors"]
+
+[[ ## product_info ## ]]
+{"name": "Yogurt Tubes", "brand": "KidsYum", "ingredients": "Milk, sugar, Blue 1, Red 40, natural flavors"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Blue 1", "safety": "DefinitelyUnsafe", "preference": "Avoid artificial colors", "reasoning": "Artificial color present."}, {"name": "Red 40", "safety": "DefinitelyUnsafe", "preference": "Avoid artificial colors", "reasoning": "Artificial color present."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Peanut allergy"]
+
+[[ ## product_info ## ]]
+{"name": "Chocolate Spread", "brand": null, "ingredients": "Sugar, palm oil, cocoa, peanuts, emulsifier (soy lecithin)"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "peanuts", "safety": "DefinitelyUnsafe", "preference": "Peanut allergy", "reasoning": "Contains peanuts."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["avoid red 4", "avoid gelatin"]
+
+[[ ## product_info ## ]]
+{"name": "Chocolate Chip Chewy Granola Bar", "brand": "McKee Foods Corporation", "ingredients": "Granola (whole grain oats, sugar, palm kernel, soybean oils, corn syrup, coconut, honey, molasses, soy lecithin, salt, corn starch, peanuts, almonds, soy flour, egg whites), corn syrup, chocolate chips (sugar, chocolate, cocoa butter, dextrose, soy lecithin, vanilla, milk), crisp rice (rice flour, sugar, whey, salt, barley malt, wheat flour, dextrose), palm kernel, soybean oils, water, sorbitol, nonfat dry milk, soy lecithin, salt, sugar, carrageenan"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "carrageenan", "safety": "DefinitelyUnsafe", "preference": "avoid gelatin", "reasoning": "carrageenan is a gelatinous substance"}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["No caffeine"]
+
+[[ ## product_info ## ]]
+{"name": "Example 019", "brand": null, "ingredients": "caffeine, water"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "caffeine", "safety": "DefinitelyUnsafe", "preference": "No caffeine", "reasoning": "Contains caffeine."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid GMO"]
+
+[[ ## product_info ## ]]
+{"name": "Example 049", "brand": null, "ingredients": "corn, sugar"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "corn", "safety": "MaybeUnsafe", "preference": "Avoid GMO", "reasoning": "May be GMO."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid corn syrup"]
+
+[[ ## product_info ## ]]
+{"name": "Pancake Syrup", "brand": null, "ingredients": "Corn syrup, caramel color, flavors"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Corn syrup", "safety": "DefinitelyUnsafe", "preference": "Avoid corn syrup", "reasoning": "Contains corn syrup."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Celiac - no gluten"]
+
+[[ ## product_info ## ]]
+{"name": "Barley Soup", "brand": "Hearty", "ingredients": "Water, barley, carrots, salt"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "barley", "safety": "DefinitelyUnsafe", "preference": "Celiac - no gluten", "reasoning": "Barley contains gluten."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["No gluten"]
+
+[[ ## product_info ## ]]
+{"name": "100% Juice", "brand": "Naked Juice Co.", "ingredients": "Pineapple Juice, Apple Juice from Concentrate (Water Added), Apple Juice Concentrate, Banana Puree, Coconut Milk (Filtered Water, Coconut Extract), Orange Juice, Chicory Root Fiber, Lemon Juice, Natural Flavor"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Chicory Root Fiber", "safety": "DefinitelyUnsafe", "preference": "No gluten", "reasoning": "Chicory Root Fiber can sometimes be processed in facilities that also process gluten."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Corn allergy"]
+
+[[ ## product_info ## ]]
+{"name": "Corn Chips", "brand": null, "ingredients": "Corn, vegetable oil (corn), salt"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "Corn", "safety": "DefinitelyUnsafe", "preference": "Corn allergy", "reasoning": "Contains corn."}]
+
+[[ ## completed ## ]]
+
+
+User message:
+
+This is an example of the task, though some input or output fields are not supplied.
+
+[[ ## dietary_preferences ## ]]
+["Avoid artificial preservatives"]
+
+[[ ## product_info ## ]]
+{"name": "Sliced Bread", "brand": null, "ingredients": "Wheat flour, water, calcium propionate, yeast, salt"}
+
+
+Assistant message:
+
+[[ ## reasoning ## ]]
+Not supplied for this particular example. 
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "calcium propionate", "safety": "MaybeUnsafe", "preference": "Avoid artificial preservatives", "reasoning": "Preservative present."}]
+
+[[ ## completed ## ]]
+
+User message:
+
+[[ ## dietary_preferences ## ]]
+["Low FODMAP"]
+
+[[ ## product_info ## ]]
+{"name": "Kekir Blueberry", "brand": null, "ingredients": "MILK fermented with live kefir cultures, blueberry, concentrated grape juice, blackcurrant, maize starch, natural flavourings, concentrated lemon juice, ICIUM to the see ingredients in BOLD, NUTRITION TYPICAL VALUES Energy Fat"}
+
+Respond with the corresponding output fields, starting with the field `[[ ## reasoning ## ]]`, then `[[ ## flagged_ingredients ## ]]` (must be formatted as a valid Python list[FlaggedIngredient]), and then ending with the marker for `[[ ## completed ## ]]`.
+
+
+Response:
+
+[[ ## reasoning ## ]]
+The user is following a Low FODMAP diet. The product contains "blackcurrant" and "concentrated lemon juice". Blackcurrant is considered high FODMAP. Concentrated lemon juice is generally considered low FODMAP in small quantities, but given the user's strict preference, it's safer to flag it. "Maize starch" is derived from corn and is generally considered low FODMAP.
+
+[[ ## flagged_ingredients ## ]]
+[{"name": "blackcurrant", "safety": "DefinitelyUnsafe", "preference": "Low FODMAP"}, {"name": "concentrated lemon juice", "safety": "MaybeUnsafe", "preference": "Low FODMAP"}]
+
+[[ ## completed ## ]]

@@ -1,0 +1,60 @@
+AI Calendar Assistant
+- CRUD Operations
+
+Scheduling events (Create)
+- define relationships of the family in a JSON or a graph DB
+- user will input their name in the AI assistant which triggers the family graph
+- user_prompt = "schedule doctor's appointment for uncle next Friday 5 pm"
+- learning rate = if there are two uncles, the assistant will ask which uncle. (good for accuracy)
+- use a LLM prompt or named entity recognition from spacy or nltk to identify the entities. NER models are case aware
+- in case of LLMs generate response. the response will give entities in a structured manner
+- parse all the entities in event variables and add the event using the calendar api
+- if adding the event to the calendar API is a success, another LLM call will be made with the response as successful. otherwise, python will return unsuccessful.
+
+Viewing Upcoming Events (Read)
+- user message to check the upcoming event, NER to extract time window with dateparer
+- extract time range of the event by assigning variables to start time and end time
+- fetch the events from the calendar.
+- Summarize the events with a LLM
+
+Rescheduling (Update)
+- find whether the event that you're trying to reschedule exists or not.
+- check whether another event is present at the time of the event which you are rescheduling
+- if not, new event = old event + time. delete old event
+- if yes, ask whether to reschedule it to another time, or the existing event to a new time or delete the existing event.
+
+Deleting the event (Delete)
+- Extract info from the user_message with NER
+- Find matching events
+- Decide response: if not found, returned not found. if more than one found, ask the user what should be done. if exact one found, delete the event id
+- embed the details in a prompt and give it to LLM to give response to the client.
+
+Conversational Scheduling
+- transcribe using a whisper model which gets embedded as user message and runs the exisiting pipeline we built for CRUD
+- speech_recognition: python package that helps to add audio
+- pyttsx3: tts package of python. speak = pyttx3.init(). speak.say()
+
+
+Neo4j family relationships
+
+
+Google Calendar API Limits
+- 1M requests per day
+- if rate limit exceeds, use exponential backoff
+- alternatives to Google Calendar API: Nextcloud (Open Source)
+
+Current date issue
+- solution 1L everyday update the date in the system prompt
+- solution 2: use web search api to return the current date
+- solution 3: use dateparser library. aware of the current date. no need to use LLM
+- fallback to LLM if dateparse fails
+
+
+
+
+Latency reduction
+- using streaming which generates the response token by token or chunk by chunk instead of the entire response once
+- using fewer output tokens by setting max_token or stop_token parameters. additionally, we can instruct the prompt for using a fewer tokens and use few shots approach
+giving examples to the prompt
+- using a fewer requests. each time a request is made, there is a round trip latency, i.e. the latency keeps on adding up. so instead we can prepare the prompt containing all steps at once
+
