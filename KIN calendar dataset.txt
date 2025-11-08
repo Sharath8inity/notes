@@ -1,0 +1,6 @@
+KIN calendar dataset
+- unable to distinguish between eventseries and eventgroup
+- examples which contained pronouns such as update it, etc which were connected to a query were removed from dataset as we cannot link chain examples
+- for a date range, eg. 2 to 6 dec, for the end date, the fine tuned response didn't return .endofdaytime function
+- birthdays are being created with createcalendarevent instead of series
+- not good at understanding event ids. no solution
