@@ -1,0 +1,17 @@
+- gpt 5's latency is 48s
+- avoid fish is present in family preferences. query "nupur has started eating fish", response was it added it to miscellaneuous notes instead of adding it to lifestyle and removing it from family preferences
+- gpt oss 20b's latency is 5.55 s, using it from now on
+- even for a simple hi or hello query, it is taking the preferences document in it's context, latency: 4.48 seconds
+- history is working great, query: "what did nupur recently start eating", response "nupur has recently started eating fish as refleted in her profile under miscellaneuous"
+- appends history of the entire conversation when a new query is added
+- great knowledge
+- query: i avoid non vegetarian foods during Ganpati festival, added in miscellaneous notes
+- (doubt) query- remove fish from allergies. should fish be added to nupur's lifestyle then?
+- query: add fish to nupur's preferences. it got added in allergies
+- (doubt): member can be added via AI?
+- query: we have a new family member called prasad and he avoids beef. AI did create a new member prasad, and since beef was present in family preferences, it didn't add into his personal preference.
+- query: summarize the last 5 changes made to the family preferences. working well
+- query: add alien lifestyle to amit. added to lifestyle, passing allowed preferences in json
+- (doubt) query: shobhit is vegan. added a new member shobhit with vegan preference. should it directly add or ask who is shobhit
+- takes care of preferences during fesivals thanks to miscellaneous notes
+- query: we are celebrating Navratri, tell us which family member avoids any foodstuff during Navratri. response: pranita avoids non veg during Ganpati but no specific dietary preference related to Navratri

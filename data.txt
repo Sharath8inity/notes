@@ -1,0 +1,40 @@
+{
+    input: {
+        categories: {
+            Allergies: Peanuts, Tree Nuts, Dairy, Eggs, Soy, Weha, Fish, Shellfish, Seasme, Celery, Lupin, Sulphies, Mustardd, Molluscs, Other
+            Sensitivities: Lactose, Fructose, Histamine, Gluten/Wheat, FODMAP, Other
+            Health Conditions: Diabetes, Hypertension, Kidney Disease, Heart Health, PKU (phenylalanine-sensititive), Anti-inflammatory/medical diet, Celiac disease, Other
+            Life Stage: Kids / Baby-friendly foods, Pregnancy / Prenatal nutrition, Breastfeeding diets, Senior-friendly, None of these apply,
+            Region: {
+                India & South Asia: Ayurveda, Hindu FoHalal (Islam dietary laws), Kosher (Jewish dietary laws), Greek / Mediterranean diets, otherod Traditions, Jain Diet, Swaminarayan Diet, Other
+                Africa: Rastafarian Ital Diet, Ethiopian Orthodox Fasting, Other
+                East Asian: Traditional Chinese Medicine, Buddhist Food Rules, Japanese Macrobiotic Diet, Other 
+                Middle East and Mediterranean:  Halal (Islam dietary laws), Kosher (Jewish dietary laws), Greek / Mediterranean diets, Other
+                North America: Native American Traditions, Christian Traditions, Other
+                Carribean Islands:
+                Seventh-day Adventist: 
+                Other
+            }
+            Avoid: {
+                Oils & Fats: Hydrogenated oils / Trans fats, Canola / Seed Oils, Palm oil, Corn / High Fructose corn syrup
+                Animal Based: Pork, Beef, Honey, Gelatin / Rennet, Shellfish, Insecs, Seafood (fish), Lard / Animal fat
+                Stimulants and Substances: Alcohol, Caffeine
+                Additives and Sweeteners: MSG, Artificial Sweetners, Preservatives, Refined sugar, Cornsyrup / HFCS, Stevia / Monk fruit
+                Plant-Based Restrictions: Nighshades (paprika, peppers, etc)
+                Garlic / Onion
+            }
+            Lifestyle: {
+                Plant & Balance: Vegetarian, Vegan, Flexitarian, Reducetarin, Pescatarian, Other
+                Quality & Source: Organic Only, Non-GMO, Locally Sourced, Seasonal Eater
+                Sustainable Living: Zero-Waste / Minimal Packaging, Clean Label
+            }
+            Nutrition: {
+                Macronutrient Goals: High Protein, Low Carb, Low fat, Balanced Macros
+                Sugar & Fiber: Low SUgar, Sugar-Free, High Fiber
+                Diet Frameworks & Patterns: Keto, DASH, Paleo, Mediterranean, Whole30, Fasting, Other
+            }
+            Ethical: Animal Welfare, Focused, Fair trade, Sustainable fishing / no overfished species, Low carbon footprint foods, Water footprint concerns, Palm-oil free, Plastic free packaging, Other
+            Taste: Spicy Lover, Avoid spicy, Sweet tooth, Avoid slimy textures, Avoid bitter foods, Cruncy / Soft Preferences, Low-sweet preferences
+        }
+    }
+}
