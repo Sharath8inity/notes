@@ -11,7 +11,23 @@
 - (doubt): member can be added via AI?
 - query: we have a new family member called prasad and he avoids beef. AI did create a new member prasad, and since beef was present in family preferences, it didn't add into his personal preference.
 - query: summarize the last 5 changes made to the family preferences. working well
-- query: add alien lifestyle to amit. added to lifestyle, passing allowed preferences in json
+- query: add alien lifestyle to amit.
 - (doubt) query: shobhit is vegan. added a new member shobhit with vegan preference. should it directly add or ask who is shobhit
 - takes care of preferences during fesivals thanks to miscellaneous notes
 - query: we are celebrating Navratri, tell us which family member avoids any foodstuff during Navratri. response: pranita avoids non veg during Ganpati but no specific dietary preference related to Navratri
+
+ensure:
+- not responding to non food related queries
+- addition of a new family member with exclusion of an allergy that the entire family has 
+- only one lifestyle is added
+
+
+- integrate xai
+- use reasoning effort params
+- use streaming (later)
+- add banner with the assistant response
+- check if any image processing is required for accurate responses
+- solve sessions issue
+- check if caching needs to be added
+- change the field names
+- modify the schema to TOON
