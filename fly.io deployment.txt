@@ -1,0 +1,153 @@
+Here’s a concise end-to-end plan for deploying both apps on Fly.io (backend + frontend) plus optional CI/CD with GitHub Actions. This assumes two Fly apps (clear separation) and Windows + Docker Desktop.
+
+## Prereqs (once)
+- Install Docker Desktop with WSL2 backend.
+- Install Fly CLI: `iwr https://fly.io/install.ps1 -useb | iex`
+- Login: `fly auth login`
+- Have secrets handy (LM keys, USER_ID, etc.).
+
+## Backend (FastAPI) deployment
+1) In `analyzer-backend/`, add a `Dockerfile` (if not present):
+```dockerfile
+# analyzer-backend/Dockerfile
+FROM python:3.11-slim
+WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PORT=8080
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential curl ca-certificates && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
+```
+2) Create the Fly app:
+```bash
+cd analyzer-backend
+fly launch --name <backend-app-name> --region <region> --no-deploy
+```
+3) Ensure `fly.toml` has:
+```toml
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+```
+4) Set secrets (runtime env):
+```bash
+fly secrets set OPENAI_API_KEY=... GROQ_API_KEY=... USER_ID=...
+# plus any others you need
+```
+5) Deploy:
+```bash
+fly deploy
+```
+Backend URL: `https://<backend-app-name>.fly.dev`
+
+## Frontend (Next.js) deployment
+1) In `analyzer-frontend/`, add a `Dockerfile`:
+```dockerfile
+# analyzer-frontend/Dockerfile
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --legacy-peer-deps
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production PORT=3000
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package*.json ./
+RUN npm install --production --legacy-peer-deps
+CMD ["npm", "start", "--", "--port", "3000", "--hostname", "0.0.0.0"]
+```
+2) Create the Fly app:
+```bash
+cd analyzer-frontend
+fly launch --name <frontend-app-name> --region <region> --no-deploy
+```
+3) Ensure `fly.toml` has:
+```toml
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+```
+4) Set env/secret for backend URL:
+```bash
+fly secrets set NEXT_PUBLIC_API_URL=https://<backend-app-name>.fly.dev
+```
+5) Deploy:
+```bash
+fly deploy
+```
+Frontend URL: `https://<frontend-app-name>.fly.dev`
+
+## CORS
+In FastAPI, include your frontend origin:
+```python
+origins = [
+    "http://localhost:3000",
+    "https://<frontend-app-name>.fly.dev",
+]
+```
+Redeploy backend if you update CORS.
+
+## CI/CD with GitHub Actions (auto-deploy on push)
+- Create a Fly API token: `fly tokens create deploy` (store as GitHub secret `FLY_API_TOKEN`).
+- Add a workflow per app (monorepo-friendly). Example for backend:
+
+`.github/workflows/deploy-backend.yml`
+```yaml
+name: Deploy Backend
+on:
+  push:
+    branches: [main]
+    paths:
+      - analyzer-backend/**
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: cd analyzer-backend && fly deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+```
+
+And frontend:
+
+`.github/workflows/deploy-frontend.yml`
+```yaml
+name: Deploy Frontend
+on:
+  push:
+    branches: [main]
+    paths:
+      - analyzer-frontend/**
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: cd analyzer-frontend && fly deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+```
+
+Notes:
+- `--remote-only` builds on Fly’s builder (no Docker local needed in CI).
+- Update `paths` if your `fly.toml` lives elsewhere.
+- Secrets for runtime (LM keys, USER_ID, NEXT_PUBLIC_API_URL, etc.) must be set in Fly, not in GitHub.
+
+## Typical workflow after code changes
+- Local/manual: `fly deploy` in each app folder.
+- With CI/CD: push to `main`; Actions will build and run `fly deploy`.
+- If you add new env vars, run `fly secrets set ...` again.
+
+If you want me to generate the exact two workflow files with your chosen app names and region, tell me the app names (frontend/backend) and region.

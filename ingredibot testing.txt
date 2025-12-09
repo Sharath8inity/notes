@@ -22,12 +22,89 @@ ensure:
 - only one lifestyle is added
 
 
-- integrate xai
-- use reasoning effort params
+- integrate xai (done)
+- use reasoning effort params (done)
 - use streaming (later)
-- add banner with the assistant response
+- add banner with the assistant response (done)
 - check if any image processing is required for accurate responses
-- solve sessions issue
+- solve session id issue (done)
 - check if caching needs to be added
-- change the field names
-- modify the schema to TOON
+- change the field names (done)
+- modify the schema to TOON (done)
+- add another field in schema to detect whether the front or back side pic is taken
+- integrate groq
+
+
+- (done) integrate groq models, keep only one product info, session based history, langfuse user id tracking
+- productqna should be standalone when opened from product details
+- connect photo extract with chatbot
+- try updating preferences
+- doc for help and support
+- implement Swapnil's feedback mechanism
+- generate descriptions for each ingredient because why it shouldn't be eaten
+- generate bot responses first for product details and dislike
+- open bot when disliked
+- whenever user navigates between multiple pages, a new convo should start
+
+20/11/2025
+- AI generated product descriptions, categories 
+- storing feedback and session data in supabase
+- in productqna ui, add scanned images, matched/unmatched, flag ingredients in red with a tooltip (swapnil)
+- make feedback page centralised (done)
+- GET response from openfoodfacts URL passing barcode dynamically (swapnil)
+- working with the responses
+- look into multi agent architecture (done)
+- bot's response first in product details page and dislike (done)
+
+24/11/2025 - 25/11/2025
+- remove tool history and image paths (done)
+- keep same fields in all signatures (done)
+- stop passing context in history and modify history fields (done)
+- change predict to react and pass tools (done)
+- either response or handoff not both
+- handoff_tool_name not visible in history
+- (optional) pass commands in foodnotes agent as a tool
+- see if invoke is necessary since we are using react
+- (optional) save experiments as datasets (swapnil)
+- (optional) reduce the signature (swapnil)
+
+26/11
+- add dspy moduls
+- add tool names
+
+28/11
+- implement web search tool
+- UI (swapnil)
+- FastAPI endpoints
+- should pick only updated_product_details.json for product details
+- instructions for catchall with context
+- handoff to productqna when asked about the ingredients
+
+02/12
+- fastapi endpoints
+- routing logic
+
+03/12
+- fastapi endpoints (done)
+- images going into the UI (done)
+- context logic for productqna
+- home screen page default to catchall (done)
+- dislike button sends response from the bot, not user (done)
+- create tools for product scans (done)
+- product details sent as context while clicking on dislike (done)
+- modify signatures (handoff field) to handoff to productqna agent (done)
+- in photo extract, change the session data logic
+- modify product details to take the detail of the bottom most updated_product_info
+- bot response first for the product details page (done)
+- (photo extract) if scanned item is not a food product, dont add any details including product name and brand name
+- bot response going into history
+
+05/12
+photo extract:
+- display original images instead of grayscaled
+- remove shared data logic
+- change flask to fastapi
+- streaming
+- change tool names, max iters params
+- print tool message "searching for tool"
+- dislike trigger logic"
